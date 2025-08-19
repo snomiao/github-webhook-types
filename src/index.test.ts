@@ -2,12 +2,13 @@ import { test, expect } from "bun:test";
 import { expectTypeOf } from "expect-type";
 import type { WEBHOOK_EVENTS, WEBHOOK_EVENT } from "../index.js";
 
+
 test("WEBHOOK_EVENTS type structure", () => {
-  expectTypeOf<WEBHOOK_EVENTS["push"]>().toMatchTypeOf<any>();
-  expectTypeOf<WEBHOOK_EVENTS["pull_request"]>().toMatchTypeOf<any>();
-  expectTypeOf<WEBHOOK_EVENTS["issues"]>().toMatchTypeOf<any>();
-  expectTypeOf<WEBHOOK_EVENTS["check_run"]>().toMatchTypeOf<any>();
-  expectTypeOf<WEBHOOK_EVENTS["workflow_run"]>().toMatchTypeOf<any>();
+  expectTypeOf<WEBHOOK_EVENTS["push"]>().toExtend<object>();
+  expectTypeOf<WEBHOOK_EVENTS["pull_request"]>().toExtend<object>();
+  expectTypeOf<WEBHOOK_EVENTS["issues"]>().toExtend<object>();
+  expectTypeOf<WEBHOOK_EVENTS["check_run"]>().toExtend<object>();
+  expectTypeOf<WEBHOOK_EVENTS["workflow_run"]>().toExtend<object>();
 });
 
 test("WEBHOOK_EVENT discriminated union", () => {
@@ -15,37 +16,37 @@ test("WEBHOOK_EVENT discriminated union", () => {
     type: "push",
     payload: {} as WEBHOOK_EVENTS["push"]
   };
-  
+
   const prEvent: WEBHOOK_EVENT = {
     type: "pull_request",
     payload: {} as WEBHOOK_EVENTS["pull_request"]
   };
-  
+
   const issueEvent: WEBHOOK_EVENT = {
     type: "issues",
     payload: {} as WEBHOOK_EVENTS["issues"]
   };
-  
-  expectTypeOf(pushEvent).toMatchTypeOf<WEBHOOK_EVENT>();
-  expectTypeOf(prEvent).toMatchTypeOf<WEBHOOK_EVENT>();
-  expectTypeOf(issueEvent).toMatchTypeOf<WEBHOOK_EVENT>();
+
+  expectTypeOf(pushEvent).toExtend<WEBHOOK_EVENT>();
+  expectTypeOf(prEvent).toExtend<WEBHOOK_EVENT>();
+  expectTypeOf(issueEvent).toExtend<WEBHOOK_EVENT>();
 });
 
 test("WEBHOOK_EVENT type discrimination", () => {
   function handleWebhookEvent(event: WEBHOOK_EVENT) {
     if (event.type === "push") {
-      expectTypeOf(event.payload).toMatchTypeOf<WEBHOOK_EVENTS["push"]>();
+      expectTypeOf(event.payload).toExtend<WEBHOOK_EVENTS["push"]>();
     }
-    
+
     if (event.type === "pull_request") {
-      expectTypeOf(event.payload).toMatchTypeOf<WEBHOOK_EVENTS["pull_request"]>();
+      expectTypeOf(event.payload).toExtend<WEBHOOK_EVENTS["pull_request"]>();
     }
-    
+
     if (event.type === "issues") {
-      expectTypeOf(event.payload).toMatchTypeOf<WEBHOOK_EVENTS["issues"]>();
+      expectTypeOf(event.payload).toExtend<WEBHOOK_EVENTS["issues"]>();
     }
   }
-  
+
   expect(handleWebhookEvent).toBeDefined();
 });
 
@@ -129,9 +130,9 @@ test("All webhook event types are present", () => {
   ];
 
   eventTypes.forEach(eventType => {
-    expectTypeOf<WEBHOOK_EVENTS[typeof eventType]>().toMatchTypeOf<any>();
+    expectTypeOf<WEBHOOK_EVENTS[typeof eventType]>().toExtend<object>();
   });
-  
+
   expect(eventTypes.length).toBeGreaterThan(70);
 });
 
@@ -143,10 +144,10 @@ test("WEBHOOK_EVENT union completeness", () => {
     { type: "workflow_run", payload: {} as WEBHOOK_EVENTS["workflow_run"] },
     { type: "check_run", payload: {} as WEBHOOK_EVENTS["check_run"] },
   ];
-  
+
   sampleEvents.forEach(event => {
-    expectTypeOf(event).toMatchTypeOf<WEBHOOK_EVENT>();
+    expectTypeOf(event).toExtend<WEBHOOK_EVENT>();
   });
-  
+
   expect(sampleEvents).toHaveLength(5);
 });
