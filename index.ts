@@ -1,5 +1,7 @@
 import type { components as GithubApiComponents } from "@octokit/openapi-types";
+
 type S = GithubApiComponents["schemas"];
+
 export type WEBHOOK_EVENTS = {
     branch_protection_configuration: S[`webhook-branch-protection-configuration${string}` & keyof S];
     branch_protection_rule: S[`webhook-branch-protection-rule${string}` & keyof S];
@@ -77,10 +79,7 @@ export type WEBHOOK_EVENTS = {
     workflow_job: S[`webhook-workflow-job${string}` & keyof S];
     workflow_run: S[`webhook-workflow-run${string}` & keyof S];
 };
-// export type WEBHOOK_EVENT<K extends keyof WEBHOOK_EVENTS = keyof WEBHOOK_EVENTS> = {
-//   type: K;
-//   payload: WEBHOOK_EVENTS[K];
-// };
+
 export type WEBHOOK_EVENT =
     | { type: "branch_protection_configuration"; payload: WEBHOOK_EVENTS["branch_protection_configuration"] }
     | { type: "branch_protection_rule"; payload: WEBHOOK_EVENTS["branch_protection_rule"] }
