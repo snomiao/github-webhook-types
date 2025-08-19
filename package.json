@@ -16,12 +16,6 @@
     "test": "bun test",
     "prepare": "husky"
   },
-  "devDependencies": {
-    "@types/bun": "^1.2.20",
-    "@types/jest": "^30.0.0",
-    "husky": "^9.1.7",
-    "semantic-release": "^24.2.7"
-  },
   "peerDependencies": {
     "typescript": "^5.9.2"
   },
@@ -34,5 +28,12 @@
   "types": "./index.ts",
   "dependencies": {
     "octokit": "^5.0.3"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.2.20",
+    "@types/jest": "^30.0.0",
+    "expect-type": "^1.2.2",
+    "husky": "^9.1.7",
+    "semantic-release": "^24.2.7"
   }
 }
