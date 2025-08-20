@@ -1,9 +1,9 @@
-import type { components as GithubApiComponents } from "@octokit/openapi-types";
-
+import type { components as GithubApiComponents, webhooks } from "@octokit/openapi-types";
+// TODO: extract EventPayloadMap from @octokit/webhooks/dist-types/generated/webhook-identifiers.d.ts
 type S = GithubApiComponents["schemas"];
 
 export type GithubSchemas = GithubApiComponents["schemas"]
-
+//  type events = webhoo
 export type WEBHOOK_EVENTS = {
     branch_protection_configuration: S[("webhook-branch-protection-configuration" | `webhook-branch-protection-configuration-${string}`) & keyof S];
     branch_protection_rule: S[("webhook-branch-protection-rule" | `webhook-branch-protection-rule-${string}`) & keyof S];
