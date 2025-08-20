@@ -24,7 +24,6 @@
     "import": "./dist/index.js",
     "types": "./src/index.ts"
   },
-  "module": "index.ts",
   "types": "./src/index.ts",
   "dependencies": {
     "octokit": "^5.0.3"
