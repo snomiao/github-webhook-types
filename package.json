@@ -10,7 +10,7 @@
   ],
   "repository": "https://github.com/snomiao/github-webhook-types",
   "scripts": {
-    "build": "bun build src/index.ts --outdir=dist",
+    "build": "tsc",
     "prerelease": "bun run build && bun run test",
     "release": "bunx standard-version && git push --follow-tags && npm publish",
     "test": "bun test",
@@ -22,9 +22,9 @@
   "type": "module",
   "exports": {
     "import": "./dist/index.js",
-    "types": "./src/index.ts"
+    "types": "./dist/index.d.ts"
   },
-  "types": "./src/index.ts",
+  "types": "./dist/index.d.ts",
   "dependencies": {
     "octokit": "^5.0.3"
   },
