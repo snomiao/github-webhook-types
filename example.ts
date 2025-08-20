@@ -1,11 +1,11 @@
-import type { WEBHOOK_EVENT, WEBHOOK_EVENTS } from './index.js';
+import type { WEBHOOK_EVENT, WEBHOOK_EVENTS } from './src/index.js';
 
 // Example 1: Handle specific webhook events
 function handlePushEvent(event: WEBHOOK_EVENTS['push']) {
   console.log(`Push to ${event.repository.full_name}`);
   console.log(`Commits: ${event.commits.length}`);
   console.log(`Branch: ${event.ref}`);
-  
+
   event.commits.forEach(commit => {
     console.log(`- ${commit.message} by ${commit.author.name}`);
   });
@@ -31,45 +31,45 @@ function handleWebhookEvent(event: WEBHOOK_EVENT) {
     case 'push':
       handlePushEvent(event.payload);
       break;
-      
+
     case 'pull_request':
       handlePullRequestEvent(event.payload);
       break;
-      
+
     case 'issues':
       handleIssuesEvent(event.payload);
       break;
-      
+
     case 'workflow_run':
       console.log(`Workflow ${event.payload.action}: ${event.payload.workflow_run.name}`);
       console.log(`Status: ${event.payload.workflow_run.status}`);
       console.log(`Conclusion: ${event.payload.workflow_run.conclusion}`);
       break;
-      
+
     case 'check_run':
       console.log(`Check run ${event.payload.action || 'unknown'}: ${event.payload.check_run.name}`);
       console.log(`Status: ${event.payload.check_run.status}`);
       console.log(`Conclusion: ${event.payload.check_run.conclusion}`);
       break;
-      
+
     case 'release':
       console.log(`Release ${event.payload.action}: ${event.payload.release.tag_name}`);
       console.log(`Name: ${event.payload.release.name}`);
       console.log(`Published: ${event.payload.release.published_at}`);
       break;
-      
+
     case 'star':
       console.log(`Repository ${event.payload.action === 'created' ? 'starred' : 'unstarred'}`);
       console.log(`By: ${event.payload.sender.login}`);
       console.log(`Repository: ${event.payload.repository.full_name}`);
       break;
-      
+
     case 'fork':
       console.log(`Repository forked: ${event.payload.forkee.full_name}`);
       console.log(`By: ${event.payload.sender.login}`);
       console.log(`From: ${event.payload.repository.full_name}`);
       break;
-      
+
     default:
       // TypeScript ensures exhaustiveness - this should never be reached
       console.log(`Unhandled webhook event type: ${(event as any).type}`);
@@ -79,7 +79,7 @@ function handleWebhookEvent(event: WEBHOOK_EVENT) {
 // Example 3: Express.js-style webhook handler
 function webhookHandler(req: { body: WEBHOOK_EVENT }) {
   const event = req.body;
-  
+
   try {
     handleWebhookEvent(event);
     console.log(`Successfully processed ${event.type} event`);
@@ -104,7 +104,7 @@ function createWebhookServer() {
           return new Response('Internal Server Error', { status: 500 });
         }
       }
-      
+
       return new Response('Not Found', { status: 404 });
     }
   });

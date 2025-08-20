@@ -1,6 +1,6 @@
 import { test, expect } from "bun:test";
 import { expectTypeOf } from "expect-type";
-import type { WEBHOOK_EVENTS, WEBHOOK_EVENT } from "../index.js";
+import type { WEBHOOK_EVENTS, WEBHOOK_EVENT } from "./index.js";
 
 
 test("WEBHOOK_EVENTS type structure", () => {
