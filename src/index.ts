@@ -7,7 +7,7 @@ export type GithubSchemas = GithubApiComponents["schemas"]
 export type WEBHOOK_EVENTS = {
     branch_protection_configuration: S[("webhook-branch-protection-configuration" | `webhook-branch-protection-configuration-${string}`) & keyof S];
     branch_protection_rule: S[("webhook-branch-protection-rule" | `webhook-branch-protection-rule-${string}`) & keyof S];
-    check_run: S[("webhook-check-run" | `webhook-check-run-${string}`) & keyof S];
+    check_run: Extract<S[("webhook-check-run" | `webhook-check-run-${string}`) & keyof S], { 'action'?: string }>;
     check_suite: S[("webhook-check-suite" | `webhook-check-suite-${string}`) & keyof S];
     code_scanning_alert: S[("webhook-code-scanning-alert" | `webhook-code-scanning-alert-${string}`) & keyof S];
     commit_comment: S[("webhook-commit-comment" | `webhook-commit-comment-${string}`) & keyof S];

@@ -47,9 +47,9 @@ function handleWebhookEvent(event: WEBHOOK_EVENT) {
       break;
 
     case 'check_run':
-      console.log(`Check run ${(event.payload as any).action || 'unknown'}: ${(event.payload as any).check_run?.name || 'unknown'}`);
-      console.log(`Status: ${(event.payload as any).check_run?.status || 'unknown'}`);
-      console.log(`Conclusion: ${(event.payload as any).check_run?.conclusion || 'none'}`);
+      console.log(`Check run ${event.payload.action || 'unknown'}: ${event.payload.check_run?.name || 'unknown'}`);
+      console.log(`Status: ${event.payload.check_run?.status || 'unknown'}`);
+      console.log(`Conclusion: ${event.payload.check_run?.conclusion || 'none'}`);
       break;
 
     case 'release':
