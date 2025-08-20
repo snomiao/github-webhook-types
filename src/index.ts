@@ -158,3 +158,6 @@ export type WEBHOOK_EVENT =
     | { type: "workflow_dispatch"; payload: WEBHOOK_EVENTS["workflow_dispatch"] }
     | { type: "workflow_job"; payload: WEBHOOK_EVENTS["workflow_job"] }
     | { type: "workflow_run"; payload: WEBHOOK_EVENTS["workflow_run"] };
+
+
+export type { GithubWebhookEvent } from './v2.ts'
