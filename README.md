@@ -1,5 +1,35 @@
 # GitHub Webhook Types
 
+⚠️ **DEPRECATED**: This package is deprecated. Please use [`@octokit/webhooks-types`](https://www.npmjs.com/package/@octokit/webhooks-types) instead.
+
+## Migration Guide
+
+Instead of:
+```bash
+bun install github-webhook-types
+```
+
+Use:
+```bash
+bun install @octokit/webhooks-types
+```
+
+Instead of:
+```typescript
+import type { WEBHOOK_EVENT, WEBHOOK_EVENTS } from 'github-webhook-types';
+```
+
+Use:
+```typescript
+import type { WebhookEvent } from '@octokit/webhooks-types';
+```
+
+The official `@octokit/webhooks-types` package provides the same TypeScript types for GitHub webhook events with better maintenance and support.
+
+---
+
+**Legacy Documentation (Deprecated)**
+
 TypeScript types for GitHub webhook events, providing comprehensive type safety for all GitHub webhook payloads.
 
 ## Features
