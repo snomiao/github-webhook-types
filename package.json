@@ -15,10 +15,10 @@
     "prerelease": "bun run build && bun run test",
     "release": "bunx standard-version && git push --follow-tags && npm publish",
     "test": "bun test",
-    "prepare": "husky"
-  },
-  "peerDependencies": {
-    "typescript": "^5.9.2"
+    "prepare": "husky",
+    "fmt": "oxfmt .",
+    "fmt:check": "oxfmt --check .",
+    "typecheck": "tsrs --noEmit"
   },
   "type": "module",
   "exports": {
@@ -37,12 +37,14 @@
     "@types/jest": "^30.0.0",
     "expect-type": "^1.2.2",
     "husky": "^9.1.7",
-    "semantic-release": "^24.2.7"
+    "oxfmt": "0.79.0",
+    "semantic-release": "^24.2.7",
+    "tsrs": "0.25.0-ts7.1.0-beta"
   },
   "lint-staged": {
     "*.{ts,js}": [
       "bun test",
-      "bun x tsc --noEmit"
+      "tsrs --noEmit"
     ]
   }
 }
